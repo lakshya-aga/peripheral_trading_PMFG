@@ -34,8 +34,20 @@ def normalize_tickers(tickers: List[str]) -> List[str]:
 
 def get_sp500_universe() -> List[str]:
     url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-    sp500 = pd.read_html(url)[0]
+
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/121.0 Safari/537.36"
+        )
+    }
+
+    # storage_options passes headers to the underlying request
+    sp500 = pd.read_html(url, storage_options=headers)[0]
+
     return normalize_tickers(sp500["Symbol"].tolist())
+
 
 def download_prices(tickers: List[str], start, end) -> pd.DataFrame:
     prices = yf.download(
