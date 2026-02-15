@@ -1,0 +1,22 @@
+name: Daily PMFG Strategy
+
+on:
+  schedule:
+    - cron: "30 22 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install yfinance pandas numpy networkx python-dateutil lxml
+      - run: mkdir -p outputs
+      - run: python run_strategy.py
+      - run: |
+          git add outputs
+          git commit -m "Daily strategy run" || true
+          git push
