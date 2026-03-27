@@ -1,0 +1,9 @@
+{
+  "trade_periods": 27,
+  "latest_mark_date": "2026-03-26",
+  "cumulative_return_pct": -11.114,
+  "best_trade_pct": 1.9645,
+  "worst_trade_pct": -3.8418,
+  "method": "equal-weight; enter next trading day close after signal; exit next signal next trading day close; mark final basket to latest close",
+  "note": "This matches the notebook selection logic, but the notebook itself does not define a backtest execution rule."
+}
